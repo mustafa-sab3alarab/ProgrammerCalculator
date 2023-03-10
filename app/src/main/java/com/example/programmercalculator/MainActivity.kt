@@ -28,15 +28,19 @@ class MainActivity : AppCompatActivity() {
         initView()
         setupDropMenu()
 
-        fromAutoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+        fromAutoCompleteTextView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
                 Log.d(TAG, "from menu item position: $position")
                 fromSelectedItem = position
             }
 
-        toAutoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+        toAutoCompleteTextView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
                 Log.d(TAG, "to menu item position: $position")
                 toSelectedItem = position
             }
+
+        resetButton.setOnClickListener { clearInput() }
 
     }
 
@@ -55,4 +59,10 @@ class MainActivity : AppCompatActivity() {
         fromAutoCompleteTextView.setAdapter(adapter)
         toAutoCompleteTextView.setAdapter(adapter)
     }
+
+    private fun clearInput() {
+        editTextNumber.text.clear()
+        textViewResult.text = "0"
+    }
+
 }
