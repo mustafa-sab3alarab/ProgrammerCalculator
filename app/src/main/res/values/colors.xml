@@ -5,4 +5,5 @@
     <color name="brand">#EC672C</color>
     <color name="background">#25232A</color>
     <color name="secondary">#4A4458</color>
+    <color name="hint_text_color">#52FFFFFF</color>
 </resources>

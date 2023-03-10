@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Programmer Calculator</string>
     <string name="convert">Convert</string>
+    <string name="value">0</string>
+    <string name="reset_button">Reset</string>
+    <string name="enter_number">Enter Number</string>
+    <string name="binary_spinner_item">Binary</string>
 </resources>

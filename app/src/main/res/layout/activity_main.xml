@@ -4,15 +4,150 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
+
     <TextView
+        android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:fontFamily="@font/poppins"
+        android:maxLines="1"
+        android:text="@string/value"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textIsSelectable="true"
+        android:textSize="@dimen/font_size_huge"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/divider_width"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:background="@color/secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/convert_button"
+        style="@style/button.buttonPrimary"
+        android:layout_width="@dimen/match_parent_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:paddingHorizontal="@dimen/spacing_x_large"
+        android:paddingVertical="@dimen/spacing_medium"
+        android:text="@string/convert"
+        app:layout_constraintEnd_toEndOf="@+id/divider"
+        app:layout_constraintStart_toEndOf="@+id/reset_button"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <Button
+        android:id="@+id/reset_button"
+        style="@style/button.buttonSecondary"
+        android:layout_width="@dimen/match_parent_width"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/spacing_x_large"
+        android:paddingVertical="@dimen/spacing_medium"
+        android:text="@string/reset_button"
+        app:layout_constraintBottom_toBottomOf="@+id/convert_button"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumber"
+        app:layout_constraintTop_toTopOf="@+id/convert_button" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="@dimen/match_parent_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:background="@drawable/text_field_background"
+        android:ems="10"
+        android:inputType="text|number"
+        android:fontFamily="@font/poppins_medium"
+        android:hint="@string/enter_number"
+        android:maxEms="8"
+        android:maxLines="1"
+        android:padding="@dimen/spacing_large"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_text_color"
+        android:textSize="@dimen/font_size_title"
+        app:layout_constraintEnd_toEndOf="@+id/divider"
+        app:layout_constraintStart_toStartOf="@+id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/toMenu" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fromMenu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="@dimen/match_parent_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_small"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_drop_down"
+        app:endIconTint="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/toMenu"
+        app:layout_constraintStart_toStartOf="@+id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
+
+        <AutoCompleteTextView
+            android:id="@+id/fromAutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_popup_background"
+            android:fontFamily="@font/poppins"
+            android:inputType="none"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:text="@string/binary_spinner_item"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_caption" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/toMenu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="@dimen/match_parent_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_drop_down"
+        app:endIconTint="@color/white"
+        app:hintTextColor="@color/brand"
+        app:layout_constraintEnd_toEndOf="@+id/divider"
+        app:layout_constraintStart_toEndOf="@+id/fromMenu"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
+
+        <AutoCompleteTextView
+            android:id="@+id/toAutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_popup_background"
+            android:fontFamily="@font/poppins"
+            android:inputType="none"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:text="@string/binary_spinner_item"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_caption" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
