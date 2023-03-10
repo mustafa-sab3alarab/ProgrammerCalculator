@@ -1,7 +1,7 @@
 package com.example.programmercalculator
 
 enum class ConvertType {
-    Binary,
+    BINARY,
     DECIMAL,
     OCTAL,
     HEXADECIMAL
