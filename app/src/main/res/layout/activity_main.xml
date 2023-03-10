@@ -78,7 +78,7 @@
         android:layout_marginTop="@dimen/spacing_large"
         android:background="@drawable/text_field_background"
         android:ems="10"
-        android:inputType="text|number"
+        android:inputType="textCapCharacters"
         android:fontFamily="@font/poppins_medium"
         android:hint="@string/enter_number"
         android:maxEms="8"
