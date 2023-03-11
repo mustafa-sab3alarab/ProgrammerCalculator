@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 Log.d(TAG, "from menu item position: $position")
                 fromSelectedItem = position
+                editTextNumber.text.clear()
             }
 
         toAutoCompleteTextView.onItemClickListener =
@@ -94,10 +95,10 @@ class MainActivity : AppCompatActivity() {
                 value.toList().all { it in '0'..'9' }
             }
             2 -> {
-                value.toList().all { it in '0'..'9' }
+                value.toList().all { it in '0'..'7' }
             }
             3 -> {
-                value.toList().all { it in '0'..'9' || it in 'A'..'F' }
+                value.toList().all { it in '0'..'9' || it in 'A'..'F' || it in 'a'..'f' }
             }
             else -> false
         }
