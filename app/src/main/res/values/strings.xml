@@ -5,4 +5,5 @@
     <string name="reset_button">Reset</string>
     <string name="enter_number">Enter Number</string>
     <string name="binary_spinner_item">Binary</string>
+    <string name="developed_by_cupcake_team">Developed by CupCake Team 🧁</string>
 </resources>
