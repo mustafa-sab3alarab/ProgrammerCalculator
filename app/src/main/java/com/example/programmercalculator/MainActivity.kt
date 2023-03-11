@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 fromSelectedItem in 0..2 && checkInputValue(value, fromSelectedItem) &&
                         value.isNotEmpty() && value.isNotBlank() ->
 
-                    textViewResult.text = convertNumber(value.toInt(), fromSelectedItem, toSelectedItem)
+                    textViewResult.text = convertNumber(value.toLong(), fromSelectedItem, toSelectedItem)
 
                 fromSelectedItem == 3 && checkInputValue(value, fromSelectedItem) &&
                         value.isNotEmpty() && value.isNotBlank() ->
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun convertNumber(value: Int, pos1: Int, pos2: Int): String {
+    private fun convertNumber(value: Long, pos1: Int, pos2: Int): String {
         Log.d(TAG, "${convertTableNumber(value)[pos1]?.get(pos2)}")
         return convertTableNumber(value)[pos1]?.get(pos2) ?: "0"
     }
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         return convertTableHexadecimal(value)[pos1]?.get(pos2) ?: "0"
     }
 
-    private fun convertTableNumber(value: Int) = mapOf(
+    private fun convertTableNumber(value: Long) = mapOf(
         0 to mapOf(
             0 to value.toString(),
             1 to Converter.binaryToDecimal(value),
