@@ -53,14 +53,9 @@ class MainActivity : AppCompatActivity() {
         convertButton.setOnClickListener {
             val value = editTextNumber.text.toString()
 
-            if (checkInputValue(value, fromSelectedItem) && value.isNotEmpty() && value.isNotBlank())
-                textViewResult.text = try {
-                    convert(value, fromBase, toBase)
-                } catch (e: NumberFormatException) {
-                    "-1"
-                }
-
-            else {
+            if (checkInputValue(value, fromSelectedItem) && value.isNotEmpty() && value.isNotBlank()){
+                textViewResult.text = try { convert(value, fromBase, toBase) } catch (e: NumberFormatException) { "-1" }
+            } else {
                 Log.d(TAG, INVALID_NUMBER)
                 Toast.makeText(this, INVALID_NUMBER, Toast.LENGTH_SHORT).show()
             }
