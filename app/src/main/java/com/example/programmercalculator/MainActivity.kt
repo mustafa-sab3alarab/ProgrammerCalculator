@@ -54,7 +54,12 @@ class MainActivity : AppCompatActivity() {
             val value = editTextNumber.text.toString()
 
             if (checkInputValue(value, fromSelectedItem) && value.isNotEmpty() && value.isNotBlank())
-                textViewResult.text = convert(value, fromBase, toBase)
+                textViewResult.text = try {
+                    convert(value, fromBase, toBase)
+                } catch (e: NumberFormatException) {
+                    "-1"
+                }
+
             else {
                 Log.d(TAG, INVALID_NUMBER)
                 Toast.makeText(this, INVALID_NUMBER, Toast.LENGTH_SHORT).show()
@@ -72,8 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupDropMenu() {
-        val items = arrayOf("Binary", "Decimal", "Octal", "Hexadecimal")
-        val adapter = ArrayAdapter(this, R.layout.list_item, items)
+        val adapter = ArrayAdapter(this, R.layout.list_item, base.keys.toList())
         fromAutoCompleteTextView.setAdapter(adapter)
         toAutoCompleteTextView.setAdapter(adapter)
     }
