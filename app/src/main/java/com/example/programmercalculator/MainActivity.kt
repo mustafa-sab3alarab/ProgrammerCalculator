@@ -17,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     private var fromSelectedItem = 0
     private var toSelectedItem = 0
 
+    private val base = mapOf("Binary" to 2, "Octal" to 8, "Decimal" to 10, "Hexadecimal" to 16)
+
+    private var fromBase = 2
+    private var toBase = 2
+
     private companion object {
         const val TAG = "MainActivity"
         const val INVALID_NUMBER = "Invalid Number"
@@ -30,37 +35,29 @@ class MainActivity : AppCompatActivity() {
         setupDropMenu()
 
         fromAutoCompleteTextView.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
                 Log.d(TAG, "from menu item position: $position")
                 fromSelectedItem = position
-                editTextNumber.text.clear()
+                fromBase = base[parent?.getItemAtPosition(position).toString()]!!
             }
 
         toAutoCompleteTextView.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
                 Log.d(TAG, "to menu item position: $position")
                 toSelectedItem = position
+                toBase = base[parent?.getItemAtPosition(position).toString()]!!
             }
 
         resetButton.setOnClickListener { clearInput() }
 
         convertButton.setOnClickListener {
             val value = editTextNumber.text.toString()
-            when {
-                fromSelectedItem in 0..2 && checkInputValue(value, fromSelectedItem) &&
-                        value.isNotEmpty() && value.isNotBlank() ->
 
-                    textViewResult.text = convertNumber(value.toLong(), fromSelectedItem, toSelectedItem)
-
-                fromSelectedItem == 3 && checkInputValue(value, fromSelectedItem) &&
-                        value.isNotEmpty() && value.isNotBlank() ->
-
-                    textViewResult.text = convertHexadecimal(value, fromSelectedItem, toSelectedItem)
-
-                else -> {
-                    Log.d(TAG, INVALID_NUMBER)
-                    Toast.makeText(this, INVALID_NUMBER, Toast.LENGTH_SHORT).show()
-                }
+            if (checkInputValue(value, fromSelectedItem) && value.isNotEmpty() && value.isNotBlank())
+                textViewResult.text = convert(value, fromBase, toBase)
+            else {
+                Log.d(TAG, INVALID_NUMBER)
+                Toast.makeText(this, INVALID_NUMBER, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -104,44 +101,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun convertNumber(value: Long, pos1: Int, pos2: Int): String {
-        Log.d(TAG, "${convertTableNumber(value)[pos1]?.get(pos2)}")
-        return convertTableNumber(value)[pos1]?.get(pos2) ?: "0"
+    private fun convert(value: String, from: Int, to: Int): String {
+        return value.toLong(from).toString(to).uppercase()
     }
-
-    private fun convertHexadecimal(value: String, pos1: Int, pos2: Int): String {
-        Log.d(TAG, "${convertTableHexadecimal(value)[pos1]?.get(pos2)}")
-        return convertTableHexadecimal(value)[pos1]?.get(pos2) ?: "0"
-    }
-
-    private fun convertTableNumber(value: Long) = mapOf(
-        0 to mapOf(
-            0 to value.toString(),
-            1 to Converter.binaryToDecimal(value),
-            2 to Converter.binaryToOctal(value),
-            3 to Converter.binaryToHexadecimal(value)
-        ),
-        1 to mapOf(
-            0 to Converter.decimalToBinary(value),
-            1 to value.toString(),
-            2 to Converter.decimalToOctal(value),
-            3 to Converter.decimalToHexadecimal(value)
-        ),
-        2 to mapOf(
-            0 to Converter.octalToBinary(value),
-            1 to Converter.octalToDecimal(value),
-            2 to value.toString(),
-            3 to Converter.octalToHexadecimal(value)
-        )
-    )
-
-    private fun convertTableHexadecimal(value: String) = mapOf(
-        3 to mapOf(
-            0 to Converter.hexadecimalToBinary(value),
-            1 to Converter.hexadecimalToDecimal(value),
-            2 to Converter.hexadecimalToOctal(value),
-            3 to value
-        )
-    )
 
 }

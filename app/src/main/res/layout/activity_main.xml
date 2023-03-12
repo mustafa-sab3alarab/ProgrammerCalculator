@@ -81,7 +81,7 @@
         android:fontFamily="@font/poppins_medium"
         android:hint="@string/enter_number"
         android:maxEms="8"
-        android:maxLength="8"
+        android:maxLength="10"
         android:maxLines="1"
         android:padding="@dimen/spacing_large"
         android:textAlignment="center"
